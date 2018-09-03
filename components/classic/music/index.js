@@ -20,8 +20,13 @@ Component({
     playgSrc:'./images/player@play.png'
   },
 
+  attached:function(){
+    this._rocoverStatus()
+    this._monitorSwitch()
+  },
+
   detached:function(e){
-    mMgr.stop()
+    // mMgr.stop()
   },
 
   /**
@@ -29,7 +34,7 @@ Component({
    */
   methods: {
     onPlay:function(){
-      if(!this.data.playing){
+      if (!this.data.playing){
         mMgr.src = this.properties.src
         this.setData({
           playing: true
@@ -40,6 +45,36 @@ Component({
         })
         mMgr.pause()
       }
+    },
+
+    _rocoverStatus:function(){
+      if (mMgr.paused){
+        this.setData({
+          playing: false
+        })
+        return
+      }
+      if (mMgr.src == this.properties.src){
+        this.setData({
+          playing:true
+        })
+      }
+    },
+    
+    _monitorSwitch:function(){
+      mMgr.onPlay(()=>{
+        this._rocoverStatus()
+      })
+      mMgr.onPause(() => {
+        this._rocoverStatus()
+      })
+      mMgr.onStop(() => {
+        this._rocoverStatus()
+      })
+      mMgr.onEnded(() => {
+        this._rocoverStatus()
+      })
     }
+
   }
 })
