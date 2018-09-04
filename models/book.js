@@ -14,6 +14,25 @@ class BookModel extends HTTP{
       url: '/book/favor/count'
     })
   }
+
+  getDetail(bid){
+    return this.request({
+      url: `/book/${bid}/detail`
+    })
+  }
+
+  getComments(bid) {
+    return this.request({
+      url: `/book/${bid}/short_comment`
+    })
+  }
+
+  getLikeStatus(bid) {
+    return this.request({
+      url: `/book/${bid}/favor`
+    })
+  }
+
 }
 
 export {BookModel}
