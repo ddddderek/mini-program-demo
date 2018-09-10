@@ -45,7 +45,7 @@
 					"id": 1,
 					"name": "书籍详情",
 					"pathName": "pages/book-detail/book-detail",
-					"query": "bid=65"
+					"query": "bid=7"
 				}
 			]
 		}
