@@ -2,7 +2,12 @@ import{
   BookModel
 } from '../../models/book'
 
+import {
+  LikeModel
+} from '../../models/like'
+
 const bookModel = new BookModel()
+const likeModel = new LikeModel()
 
 Page({
 
@@ -14,6 +19,7 @@ Page({
     comments:[],
     likeStatus:false,
     likeCount:0,
+    posting:false
   },
 
   /**
@@ -42,6 +48,23 @@ Page({
         likeStatus: res.like_status,
         likeCount: res.fav_nums
       })
+    })
+  },
+
+  onLike: function (e) {
+    let behavior = e.detail.behavior
+    likeModel.like(behavior, this.data.book.id, 400)
+  },
+
+  onFakePost(){
+    this.setData({
+      posting:true
+    })
+  },
+
+  onCancel(e){
+    this.setData({
+      posting: false
     })
   },
 
