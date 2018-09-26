@@ -1,2 +1,20 @@
-<!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<view class="container">
+    <image src="/images/my/my@bg.png" class="bg"></image>
+    <v-button wx:if="{{!authorized}}" open-type="getUserInfo"  class="avatar avatar-position" bind:getuserinfo="onGetUserInfo">
+      <image slot="img" class="avatar" src="/images/my/my.png" />
+    </v-button>
+    <view wx:if="{{authorized}}" class="avatar-container avatar-position">
+      <image src="{{userInfo.avatarUrl}}" class="avatar"></image>
+      <text>{{userInfo.nickName}}</text>
+    </view>
+    <view class="about-container">
+        <view bind:tap="onJumpToAbout" class="about-us">
+            <image src="/images/my/about.png" />
+            <text class="description">关于我们</text>
+        </view>
+        <view class="about-us">
+            <text class="book-num">{{bookCount}}</text>
+            <text class="description">喜欢的书</text>
+        </view>
+    </view> 
+</view>
