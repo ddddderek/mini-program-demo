@@ -18,3 +18,5 @@
         </view>
     </view> 
 </view>
+
+<image bind:tap="onStudy" class="study" src="/images/my/study.png"></image>

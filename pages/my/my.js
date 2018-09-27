@@ -1,4 +1,15 @@
 // pages/my/my.js
+import {
+  BookModel
+} from '../../models/book.js'
+
+import {
+   ClassicModel
+} from '../../models/classic.js'
+
+const bookModel = new BookModel
+const classicModel = new ClassicModel
+
 Page({
 
   /**
@@ -6,7 +17,8 @@ Page({
    */
   data: {
     authorized:false,
-    userInfo:null
+    userInfo:null,
+    bookCount:0
   },
 
   /**
@@ -15,6 +27,16 @@ Page({
   onLoad: function (options) {
     //用户是否授权
     this.userAuthorized()
+    this.getMyBookCount()
+  },
+
+  getMyBookCount(){
+    bookModel.getMyBoolCount()
+      .then(res=>{
+        this.setData({
+          bookCount:res.count
+        })
+      })
   },
 
   userAuthorized(){
@@ -47,6 +69,18 @@ Page({
         authorized: true
       })
     } 
+  },
+
+  onJumpToAbout(e){
+    wx.navigateTo({
+      url: '/pages/about/about',
+    })
+  },
+
+  onStudy(e){
+    wx.navigateTo({
+      url: '/pages/course/course',
+    })
   },
 
   /**

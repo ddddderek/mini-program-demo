@@ -55,6 +55,12 @@ class BookModel extends HTTP{
     })
   }
 
+  getMyBoolCount(){
+    return this.request({
+      url:'/book/favor/count'
+    })
+  }
+
 }
 
 export {BookModel}
